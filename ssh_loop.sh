@@ -6,7 +6,6 @@ INTERPRETER=""
 SCRIPT_FILE_FLAG=0
 DELETE_SCRIPT_FILE=0
 DELETE_HOSTS_FILE=0
-DEFAULT_TOKEN="readonly_lhck_token"
 
 usage(){
     echo "----------------------------------------------------"
@@ -30,15 +29,8 @@ excute(){
 }
 
 [[ $# < 2 ]] && usage
-while getopts h:s:e:r: arg;do
+while getopts h:e:r: arg;do
     case $arg in
-    s)
-        tag_string=$OPTARG
-        hosts=${tag_string}_`date +%s`
-        lhip -s $tag_string -t $DEFAULT_TOKEN| grep -v '===' > ./$hosts
-        [[ $? != 0 ]] && echo "Can't get hosts list from xbox" && exit
-        DELETE_HOSTS_FILE=1
-    ;;
     h)
         hosts=$OPTARG
     ;;
