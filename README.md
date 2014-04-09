@@ -5,7 +5,7 @@
 ## 选取机器
 也可以指定单个机器, 或者指定机器列表文件, 比如
 
-    ./ssh_loop.sh -h server -e "date"
+    ./ssh_loop.sh -h { $server } -e "date"
 
     ./ssh_loop.sh -h { $host_list_file } -e "date"  # 文件的第一列将作为执行的目标
 
@@ -25,9 +25,9 @@
 <!--
 可能你的脚本不是静态的，每次执行都有些变化，通过ssh_loop.sh执行的脚本还支持模版。
 
-    ./ssh_loop.sh -h sd-im-fe01.bj -r "/path/to/script_file 1"
+    ./ssh_loop.sh -h { $server } -r "{ $script_file } {$args}"
 
-`/path/to/script_file 1`的执行结果应该是一个脚本，ssh_loop.sh将在sd-im-fe01.bj上执行这个脚本。
+`{ $script_file } {$args}`的执行结果应该是一个脚本，ssh_loop.sh将在 { $server } 上执行这个脚本。
 
 这里给出一个简单的模版脚本的例子：
 
